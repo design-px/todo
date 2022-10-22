@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="icon" href="./app/img/todo.png">
+    <link rel="stylesheet" href="./app/css/style.css">
+</head>
+
+<body>
+
+    <div class="todo-container">
+        <header>
+            <div class="header">
+                <h2>
+                    <img src="./app/img/todo.png">
+                    To do List ✔
+                </h2>
+            </div>
+            <h3 class="notification"></h3>
+            <form id="todoform">
+                <input type="text" name="newtodo" id="newtodo" placeholder="Type your task" required>
+                <button type="submit" class="addBtn" id="addBtn">Add Task</button>
+            </form>
+        </header>
+
+        <div id="todos-list" class="content">
+        </div>
+    </div>
+
+    <script src="./app/js/script.js"></script>
+</body>
+
+</html>

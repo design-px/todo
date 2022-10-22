@@ -1,0 +1,168 @@
+* {
+    font-family: sans-serif;
+}
+
+
+.todo-container {
+    background: linear-gradient(3deg, #0d8800, #3f00e9);
+    max-width: 400px;
+    min-height: 600px;
+    margin: auto;
+    border-radius: 2em;
+}
+
+
+/* header */
+header {
+    background: linear-gradient(45deg, #005603, #42cc66);
+    padding: 1em;
+    border-radius: 2em;
+    color: white;
+}
+
+header img {
+    width: 50px;
+    margin-right: 1em;
+}
+
+header h2 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    border: none;
+    outline: none;
+    border-radius: .5em;
+    padding: 8px 10px;
+    font-size: 1rem;
+}
+
+
+header .addBtn {
+    background: linear-gradient(45deg, #360808, #9c27b0);
+    margin-left: 10px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.9);
+    transition: .3s;
+}
+
+
+
+
+
+
+
+/* content */
+.content {
+    padding: 1em;
+    height: 360px;
+    overflow-y: auto;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #33f033;
+    background: linear-gradient(transparent, rgb(255, 102, 166));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(black, rgb(34, 250, 6));
+}
+
+
+/* empty-msg */
+.empty-msg {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+
+/* content > todo */
+.todo {
+    position: relative;
+    background-color: rgb(255, 253, 209);
+    border-radius: 1em;
+    margin-bottom: 10px;
+}
+
+.todo p {
+    display: inline-block;
+    width: 250px;
+    margin: 10px 5px;
+    word-wrap: break-word;
+}
+
+@media (max-width:500px) {
+    .todo p {
+        width: 62%;
+    }
+}
+
+.todo i {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.todo input[type="checkbox"] {
+    height: 15px;
+    width: 15px;
+}
+
+
+
+
+
+.checked::after {
+    content: '___________';
+    position: absolute;
+    top: 2px;
+    left: 40px;
+    color: black;
+}
+
+.notification {
+    width: 240px;
+    height: 20px;
+
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+
+    margin: auto;
+    padding: 4px;
+    margin-bottom: 4px;
+
+    text-align: center;
+
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+.notify {
+    transform: translateY(-10px);
+    transition: all 1s ease-in-out;
+    opacity: 1;
+}

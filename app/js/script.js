@@ -122,8 +122,7 @@ function checkTodo(todoId) {
     //change value of checked property of todo object
     todosArray = todosArray.map((todo, index) => {
         return {
-            value: todo.value,
-            color: todo.color,
+            ...todo,
             checked: index === todoId ? !todo.checked : todo.checked
         }
     })

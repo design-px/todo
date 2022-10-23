@@ -4,7 +4,7 @@ const todoInput = document.getElementById('newtodo');
 const todosListEl = document.getElementById('todos-list');
 const notification = document.querySelector('.notification');
 
-//todoArray
+//todosArray
 const todosArray = JSON.stringify(localStorage.getItem("todosArray")) || [];
 let editTodoId = -1;
 

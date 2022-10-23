@@ -115,3 +115,22 @@ todosListEl.addEventListener(('click'), (event) => {
     action === "edit" && editTodo(todoId);
     action === "delete" && deleteTodo(todoId);
 })
+
+//action check todo
+function checkTodo(todoId) {
+
+    //change value of checked property of todo object
+    todosArray = todosArray.map((todo, index) => {
+        return {
+            value: todo.value,
+            color: todo.color,
+            checked: index === todoId ? !todo.checked : todo.checked
+        }
+    })
+
+    //re-render todo
+    renderTodo();
+
+    //update stored value
+    localStorage.setItem("todosArray", JSON.stringify(todosArray));
+}

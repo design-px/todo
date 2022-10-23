@@ -78,3 +78,19 @@ form.addEventListener(('submit'), (event) => {
 
     localStorage.setItem("todosArray", JSON.stringify(todosArray))
 })
+
+//saveTodo
+function saveTodo() {
+
+    const todoValue = todoInput.value;
+
+    //push todo object for html elements to todosArray
+    todosArray.push({
+        value: todoValue,
+        checked: false,
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+    })
+
+    //reset todo input field 
+    todoInput.value = "";
+}

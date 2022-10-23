@@ -133,3 +133,17 @@ function checkTodo(todoId) {
     //update stored value
     localStorage.setItem("todosArray", JSON.stringify(todosArray));
 }
+
+function deleteTodo(todoId) {
+
+    todosArray = todosArray.filter((todo, index) => index !== todoId);
+
+    //reset edit todo id - to prevent editing another todo if we editing current todo and deleted
+    editTodoId = -1;
+
+    //re-render - filtered array
+    renderTodo();
+
+    //update stored value
+    localStorage.setItem('todosArray', JSON.stringify(todosArray))
+}

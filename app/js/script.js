@@ -5,7 +5,7 @@ const todosListEl = document.getElementById('todos-list');
 const notification = document.querySelector('.notification');
 
 //todosArray
-const todosArray = JSON.stringify(localStorage.getItem("todosArray")) || [];
+let todosArray = JSON.parse(localStorage.getItem("todosArray")) || [];
 let editTodoId = -1;
 
 //startup render
@@ -16,7 +16,7 @@ function renderTodo() {
 
     //1 check to list is empty
     if (todosArray.length === 0) {
-        todosListEl.innerHTML = `<center> To do list is empty<center>`;
+        todosListEl.innerHTML = `<center class="empty-msg"> To do list is empty<center>`;
         return
     }
 
@@ -33,7 +33,7 @@ function renderTodo() {
     </div> 
     */
     //3 creating html elements with styles by render todo array
-    todosArray.forEach((todo) => {
+    todosArray.forEach((todo, index) => {
         const todoEl = document.createElement("div");
         const iEl_1 = document.createElement("i");
         const pEl = document.createElement("p");
@@ -68,3 +68,13 @@ function renderTodo() {
         todosListEl.append(todoEl);
     })
 }
+
+//form submit action - initiate save, render, store
+form.addEventListener(('submit'), (event) => {
+    event.preventDefault();
+
+    saveTodo();
+    renderTodo();
+
+    localStorage.setItem("todosArray", JSON.stringify(todosArray))
+})

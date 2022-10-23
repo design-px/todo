@@ -84,13 +84,26 @@ function saveTodo() {
 
     const todoValue = todoInput.value;
 
-    //push todo object for html elements to todosArray
-    todosArray.push({
-        value: todoValue,
-        checked: false,
-        color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-    })
 
+    if (editTodoId >= 0) {
+        todosArray = todosArray.map((todo, index) => {
+            return {
+                ...todo,
+                value: index === editTodoId ? todoValue : todo.value
+            }
+        })
+
+        //reset edit todo id
+        editTodoId = -1;
+    }
+    else {
+        //push todo object for html elements to todosArray
+        todosArray.push({
+            value: todoValue,
+            checked: false,
+            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+        })
+    }
     //reset todo input field 
     todoInput.value = "";
 }
@@ -146,4 +159,9 @@ function deleteTodo(todoId) {
 
     //update stored value
     localStorage.setItem('todosArray', JSON.stringify(todosArray))
+}
+
+function editTodo(todoId) {
+    todoInput.value = todosArray[todoId].value;
+    editTodoId = todoId;
 }

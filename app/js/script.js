@@ -94,3 +94,24 @@ function saveTodo() {
     //reset todo input field 
     todoInput.value = "";
 }
+
+//selecting elements of todos list and initiate check, edit, delete features
+todosListEl.addEventListener(('click'), (event) => {
+    //get todo and its element
+    let todoChild = event.target; // element of todo
+    let todoParent = todoChild.parentNode; // parent element of target
+
+    //get element which has class name of parent is todo
+    if (todoParent.className !== "todo") return;
+
+    //get id of todo
+    let todoId = Number(todoParent.id)
+
+    //get data attribute value of element of todo
+    const action = todoChild.dataset.action;
+
+    //actions - select, edit and update, delete todo
+    action === "check" && checkTodo(todoId);
+    action === "edit" && editTodo(todoId);
+    action === "delete" && deleteTodo(todoId);
+})

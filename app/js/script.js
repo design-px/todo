@@ -84,25 +84,41 @@ function saveTodo() {
 
     const todoValue = todoInput.value;
 
+    //check duplicate todo
+    const isDuplicate = todosArray.some((todo) => todo.value.toUpperCase() === todoValue.toUpperCase());
 
-    if (editTodoId >= 0) {
-        todosArray = todosArray.map((todo, index) => {
-            return {
-                ...todo,
-                value: index === editTodoId ? todoValue : todo.value
-            }
-        })
+    if (isDuplicate) {
+        //confirm duplicate todo
+        const addDuplicate = confirm('adding same task?');
 
-        //reset edit todo id
-        editTodoId = -1;
-    }
-    else {
-        //push todo object for html elements to todosArray
-        todosArray.push({
-            value: todoValue,
-            checked: false,
-            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-        })
+        if (addDuplicate) {
+            //adding duplicate todo to todosArray
+            todosArray.push({
+                value: todoValue,
+                checked: false,
+                color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+            });
+        }
+    } else {
+        if (editTodoId >= 0) {
+            todosArray = todosArray.map((todo, index) => {
+                return {
+                    ...todo,
+                    value: index === editTodoId ? todoValue : todo.value
+                }
+            })
+
+            //reset edit todo id
+            editTodoId = -1;
+        }
+        else {
+            //push todo object for html elements to todosArray
+            todosArray.push({
+                value: todoValue,
+                checked: false,
+                color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+            })
+        }
     }
     //reset todo input field 
     todoInput.value = "";

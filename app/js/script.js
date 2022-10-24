@@ -107,6 +107,7 @@ function saveTodo() {
                     value: index === editTodoId ? todoValue : todo.value
                 }
             })
+            showNotification('task edited');
 
             //reset edit todo id
             editTodoId = -1;
@@ -118,6 +119,7 @@ function saveTodo() {
                 checked: false,
                 color: '#' + Math.floor(Math.random() * 16777215).toString(16)
             })
+            showNotification('task added');
         }
     }
     //reset todo input field 
@@ -167,6 +169,8 @@ function deleteTodo(todoId) {
 
     todosArray = todosArray.filter((todo, index) => index !== todoId);
 
+    showNotification('task deleted');
+
     //reset edit todo id - to prevent editing another todo if we editing current todo and deleted
     editTodoId = -1;
 
@@ -180,4 +184,19 @@ function deleteTodo(todoId) {
 function editTodo(todoId) {
     todoInput.value = todosArray[todoId].value;
     editTodoId = todoId;
+
+    showNotification('editing task');
+
+}
+
+function showNotification(message) {
+    notification.innerHTML = message;
+
+    //show notification
+    notification.classList.add('notify');
+
+    //hide notification
+    setTimeout(() => {
+        notification.classList.remove('notify');
+    }, 1500);
 }

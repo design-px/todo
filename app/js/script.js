@@ -101,12 +101,10 @@ function saveTodo() {
         }
     } else {
         if (editTodoId >= 0) {
-            todosArray = todosArray.map((todo, index) => {
-                return {
-                    ...todo,
-                    value: index === editTodoId ? todoValue : todo.value
-                }
-            })
+            todosArray = todosArray.map((todo, index) => ({
+                ...todo,
+                value: index === editTodoId ? todoValue : todo.value
+            }))
             showNotification('task edited');
 
             //reset edit todo id
@@ -151,12 +149,10 @@ todosListEl.addEventListener(('click'), (event) => {
 function checkTodo(todoId) {
 
     //change value of checked property of todo object
-    todosArray = todosArray.map((todo, index) => {
-        return {
-            ...todo,
-            checked: index === todoId ? !todo.checked : todo.checked
-        }
-    })
+    todosArray = todosArray.map((todo, index) => ({
+        ...todo,
+        checked: index === todoId ? !todo.checked : todo.checked
+    }))
 
     //re-render todo
     renderTodo();

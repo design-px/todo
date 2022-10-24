@@ -106,6 +106,9 @@ button:active {
     background-color: rgb(255, 253, 209);
     border-radius: 1em;
     margin-bottom: 10px;
+
+    display: flex;
+    align-items: baseline;
 }
 
 .todo p {

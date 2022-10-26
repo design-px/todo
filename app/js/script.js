@@ -35,35 +35,22 @@ function renderTodo() {
     //3 creating html elements with styles by render todo array
     todosArray.forEach((todo, index) => {
         const todoEl = document.createElement("div");
-        const iEl_1 = document.createElement("i");
-        const pEl = document.createElement("p");
-        const iEl_2 = document.createElement("i");
-        const iEl_3 = document.createElement("i");
-
         todoEl.className = "todo";
         todoEl.id = `${index}`;
 
-        iEl_1.className = `bi ${todo.checked ? 'bi-check-circle-fill' : 'bi-circle'}`;
-        iEl_1.setAttribute("data-action", "check");
-        iEl_1.style.color = todo.color;
+        const createEl = (tag, className, action, color, value) => {
+            const el = document.createElement(tag);
+            el.className = className;
+            el.setAttribute("data-action", action);
+            el.style.color = color;
+            el.textContent = value;
 
-        pEl.className = `${todo.checked ? 'checked' : ''}`;
-        pEl.setAttribute("data-action", "check");
-        pEl.textContent = todo.value;
-
-        iEl_2.className = `bi bi-pencil-square`;
-        iEl_2.setAttribute("data-action", "edit");
-        iEl_2.style.color = "green";
-
-        iEl_3.className = `bi bi-trash`;
-        iEl_3.setAttribute("data-action", "delete");
-        iEl_3.style.color = "red";
-
-
-        todoEl.append(iEl_1);
-        todoEl.append(pEl);
-        todoEl.append(iEl_2);
-        todoEl.append(iEl_3);
+            todoEl.append(el);
+        }
+        createEl("i", `bi ${todo.checked ? 'bi-check-circle-fill' : 'bi-circle'}`, "check", todo.color);
+        createEl("p", `${todo.checked ? 'checked' : ''}`, "check", "", todo.value);
+        createEl("i", "bi bi-pencil-square", "edit", "green");
+        createEl("i", "bi bi-trash", "delete", "red");
 
         todosListEl.append(todoEl);
     })
@@ -83,7 +70,11 @@ form.addEventListener(('submit'), (event) => {
 function saveTodo() {
 
     const todoValue = todoInput.value;
-
+    const todoObj = {
+        value: todoValue,
+        checked: false,
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+    }
     //check duplicate todo
     const isDuplicate = todosArray.some((todo) => todo.value.toUpperCase() === todoValue.toUpperCase());
 
@@ -93,20 +84,14 @@ function saveTodo() {
 
         if (addDuplicate) {
             //adding duplicate todo to todosArray
-            todosArray.push({
-                value: todoValue,
-                checked: false,
-                color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-            });
+            todosArray.push(todoObj);
         }
     } else {
         if (editTodoId >= 0) {
-            todosArray = todosArray.map((todo, index) => {
-                return {
-                    ...todo,
-                    value: index === editTodoId ? todoValue : todo.value
-                }
-            })
+            todosArray = todosArray.map((todo, index) => ({
+                ...todo,
+                value: index === editTodoId ? todoValue : todo.value
+            }))
             showNotification('task edited');
 
             //reset edit todo id
@@ -114,11 +99,7 @@ function saveTodo() {
         }
         else {
             //push todo object for html elements to todosArray
-            todosArray.push({
-                value: todoValue,
-                checked: false,
-                color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-            })
+            todosArray.push(todoObj)
             showNotification('task added');
         }
     }
@@ -151,12 +132,10 @@ todosListEl.addEventListener(('click'), (event) => {
 function checkTodo(todoId) {
 
     //change value of checked property of todo object
-    todosArray = todosArray.map((todo, index) => {
-        return {
-            ...todo,
-            checked: index === todoId ? !todo.checked : todo.checked
-        }
-    })
+    todosArray = todosArray.map((todo, index) => ({
+        ...todo,
+        checked: index === todoId ? !todo.checked : todo.checked
+    }))
 
     //re-render todo
     renderTodo();

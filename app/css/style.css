@@ -169,3 +169,35 @@ button:active {
     transition: all 1s ease-in-out;
     opacity: 1;
 }
+
+/* tooltip */
+.todo i:not(:nth-child(2))::after {
+    position: absolute;
+    top: -36%;
+    font-size: 14px;
+    color: white;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    padding: 4px 10px;
+    opacity: 0;
+    z-index: 10;
+}
+
+.todo i:nth-child(1)::after {
+    content: 'check';
+    background-color: blue;
+}
+
+.todo i:nth-child(3)::after {
+    content: 'Edit';
+    background-color: green;
+}
+
+.todo i:last-child::after {
+    content: 'Delete';
+    background-color: red;
+}
+
+.todo i:hover:after {
+    opacity: 1;
+}
